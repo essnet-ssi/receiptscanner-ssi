@@ -1,0 +1,135 @@
+{
+    "Action.JPG":
+    {
+      "vendor": "Action",
+      "address": "Markthof 42-48 1096 Etten-Leur",
+      "date": "12-08-2023 11:44:40",
+      "articles": [
+        {"description": "dumil diepvries-vershoudzakken 100st", "quantity": 1, "tot_art_price": 2.99, "unit_price": 2.99},
+        {"description": "office essentials enveloppen c6 50st", "quantity": 1, "tot_art_price": 0.88, "unit_price": 0.88},
+        {"description": "plumeau uitschuifbaar 145cm", "quantity": 1, "tot_art_price": 1.99, "unit_price": 1.99},
+        {"description": "plumeau uitschuifbaar 145cm", "quantity": 1, "tot_art_price": 1.99, "unit_price": 1.99},
+        {"description": "folievlokken+ronde pot goud/zilver/rosé", "quantity": 1, "tot_art_price":1.36, "unit_price": 1.36},
+        {"description": "spargo vochtig vloerwisdoekje 20st", "quantity": 2, "tot_art_price": 1.98, "unit_price": 0.99},
+        {"description": "office essentials schrijfblok a5 lijn", "quantity": 4, "tot_art_price": 2.72, "unit_price": 0.68},
+        {"description": "bts office ess. markeerstift 4st neon", "quantity": 1, "tot_art_price": 0.64, "unit_price": 0.64},
+        {"description": "oe nietmachine + 1600nietjes div.klr", "quantity": 1, "tot_art_price": 1.49, "unit_price": 1.49},
+        {"description": "spargo statische stofdoeken 20st 65g/m2", "quantity": 2, "tot_art_price": 1.54, "unit_price": 0.77}
+      ],
+      "total": 17.58
+    },
+    "AH.JPG":{
+      "vendor": "Albert Heijn winkel 1007",
+      "address": "Moerwijk 2 4826 HN Breda",
+      "date": "11/07/2023 12:16",
+      "articles": [
+        {"description": "AH PASTA", "quantity": 1, "tot_art_price": 2.39, "unit_price": 2.39},
+        {"description": "TAGIATELLE", "quantity": 2, "tot_art_price": 4.98, "unit_price": 2.49},
+        {"description": "RAAK SIROOP", "quantity": 1, "tot_art_price": 2.29, "unit_price": 2.29},
+        {"description": "RAAK SIROOP", "quantity": 1, "tot_art_price": 2.29, "unit_price": 2.29},
+        {"description": "SCHOUDERHAM", "quantity": 1, "tot_art_price":1.99, "unit_price": 1.99},
+        {"description": "WITLOF", "quantity": 1, "tot_art_price": 2.39, "unit_price": 2.39},
+        {"description": "DE KOFFIE", "quantity": 3, "tot_art_price": 22.47, "unit_price": 7.49}
+      ],
+      "total": 27.13
+    },
+    "Blokker.JPG":{
+        "vendor": "Blokker",
+        "address": "Kruisvoort 91 4814 RX Breda",
+        "date": "09/08/2023 10:58",
+        "articles": [
+          {"description": "M MODULA BEWAARDOOS MINI 375ML", "quantity": 2, "tot_art_price": 9.98, "unit_price": 4.99}
+        ],
+        "total": 9.98
+    },
+    "Etos.JPG":{
+        "vendor": "Etos",
+        "address": "Liguster 14, Leidschendam",
+        "date": "04/10/2023 15:48",
+        "articles": [
+          {"description": "ETOS EYE M-UP REM BI PHASE", "quantity": 1, "tot_art_price": 1.89, "unit_price": 1.89}
+        ],
+        "total": 1.89
+    },
+    "Hema.JPG":{
+        "vendor": "HEMA",
+        "address": "Winkelcentrum 1 4873 AA Etten-Leur",
+        "date": "20/07/2023 10:50",
+        "articles": [
+          {"description": "wenskaart FSC MIX", "quantity": 1, "tot_art_price": 2.75, "unit_price": 2.75}
+        ],
+        "total": 2.75
+    },
+    "Jumbo.JPG":{
+      "vendor": "JUMBO",
+      "address": "Pastoor van Spaandonkstraat 60 4813 BS Breda",
+      "date": "09/08/2023 11:41",
+      "articles": [
+        {"description": "MINI CHOCOSOESJES", "quantity": 1, "tot_art_price": 3.99, "unit_price": 3.99},
+        {"description": "CALVE YOFRESH 650ML", "quantity": 1, "tot_art_price": 3.06, "unit_price": 3.06},
+        {"description": "DE RUIJT BLW WIT MUI", "quantity": 1, "tot_art_price": 2.56, "unit_price": 2.56},
+        {"description": "REMIA SAL. CAESAR", "quantity": 1, "tot_art_price": 1.97, "unit_price": 1.97},
+        {"description": "JUMBO DRESS CAESAR", "quantity": 2, "tot_art_price":2.78, "unit_price": 1.39},
+        {"description": "KIES&MIX SALADE", "quantity": 1, "tot_art_price": -2.27, "unit_price": -2.27},
+        {"description": "JUMBO CEASAR DRESSIN", "quantity": 1, "tot_art_price": 1.49, "unit_price": 1.49},
+        {"description": "JONG BLAD/RUCOLA 75", "quantity": 1, "tot_art_price": 1.16, "unit_price": 1.16},
+        {"description": "CONIM BOEMB NASI", "quantity": 1, "tot_art_price":1.77, "unit_price": 1.77}
+      ],
+      "total": 16.51
+    },
+    "Kruidvat.JPG":{
+        "vendor": "Kruidvat",
+        "address": "",
+        "date": "20/09/2023 16:40",
+        "articles": [
+          {"description": "NEUSSPRAY KRUIDVAT", "quantity": 1, "tot_art_price": 3.29, "unit_price": 3.29},
+          {"description": "PASTILLE FISHERMAN", "quantity": 1, "tot_art_price": 1.19, "unit_price": 1.19}
+        ],
+        "total": 4.48
+    },
+    "Lidl.JPG":{
+      "vendor": "Lidl Breda",
+      "address": "Kesterenlaan 150 4822 WK Breda",
+      "date": "28/09/2023 10:14",
+      "articles": [
+        {"description": "Hertenbiefstuk naturel", "quantity": 1, "tot_art_price": 6.49, "unit_price": 6.49},
+        {"description": "Speklappen", "quantity": 1, "tot_art_price": 6.59, "unit_price": 6.59},
+        {"description": "Broccoli", "quantity": 1, "tot_art_price": 1.19, "unit_price": 1.19},
+        {"description": "Prei", "quantity": 1, "tot_art_price": 0.49, "unit_price": 0.49},
+        {"description": "Halfvolle milde yoghurt", "quantity": 1, "tot_art_price":1.15, "unit_price": 1.15},
+        {"description": "Verse halfvolle melk", "quantity": 3, "tot_art_price": 2.85, "unit_price": 0.95},
+        {"description": "Calvé pindakaas", "quantity": 1, "tot_art_price": 4.15, "unit_price": 4.15},
+        {"description": "Fond", "quantity": 1, "tot_art_price": 1.69, "unit_price": 1.69},
+        {"description": "Pitabroodjes XL", "quantity": 1, "tot_art_price":0.75, "unit_price": 0.75},
+        {"description": "Aardappel iets kruimig", "quantity": 1, "tot_art_price": 3.99, "unit_price": 3.99},
+        {"description": "Kristalsuiker", "quantity": 1, "tot_art_price": 1.04, "unit_price": 1.04},
+        {"description": "Bananen", "quantity": 0.966, "tot_art_price": 1.34, "unit_price": 1.39},
+        {"description": "Peterselie plat", "quantity": 1, "tot_art_price": 0.99, "unit_price": 0.99},
+        {"description": "Selderij", "quantity": 1, "tot_art_price": 0.99, "unit_price": 0.99}
+      ],
+      "total": 33.70
+    },
+    "Toko.JPG":{
+        "vendor": "TOKO EDDO",
+        "address": "",
+        "date": "20/10/2023 16:27",
+        "articles": [
+          {"description": "BAMI RAMES SPECIAAL", "quantity": 2, "tot_art_price": 22.50, "unit_price": 11.25},
+          {"description": "GADO GADO", "quantity": 1, "tot_art_price": 6.75, "unit_price": 6.75}
+        ],
+        "total": 29.25
+    },
+    "Winkel.JPG":{
+        "vendor": "ITALY WIJNEN EN DELICATESSEN",
+        "address": "Piet Heinstraat 20 2518 CH Den Haag",
+        "date": "21/10/2023 13:48",
+        "articles": [
+          {"description": "PROSCIUTTO SAN DANIELE", "quantity": 0.088, "tot_art_price": 4.57, "unit_price": 51.95},
+          {"description": "SALAME", "quantity": 0.056, "tot_art_price": 1.96, "unit_price": 34.95},
+          {"description": "PANCETTAQ COPPATA", "quantity": 0.116, "tot_art_price": 3.49, "unit_price": 30.05},
+          {"description": "PASTA RIPIENA", "quantity": 0.162, "tot_art_price": 4.37, "unit_price": 26.95},
+          {"description": "CACCIATORE", "quantity": 0.220, "tot_art_price": 8.79, "unit_price": 39.95}
+        ],
+        "total": 23.43
+    }
+  }

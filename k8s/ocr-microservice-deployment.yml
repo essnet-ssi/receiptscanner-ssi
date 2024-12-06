@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocr-microservice
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: ocr-microservice
+  template:
+    metadata:
+      labels:
+        app: ocr-microservice
+    spec:
+      containers:
+      - name: ocr-microservice
+        image: docker-image-name  # TODO: replace with docker-image-name
+        ports:
+        - containerPort: 8080 
+        env:
+          - name: RABBITMQ_HOST
+            value: "rabbitmq" 

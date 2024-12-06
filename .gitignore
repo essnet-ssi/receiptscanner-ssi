@@ -1,0 +1,33 @@
+# Python-specific ignores
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints
+
+# Project-specific ignores
+build/
+src/ocr_microservice/ocr_pipeline/resources/models/*
+data/**/*.txt
+data/*/*.jpg
+data/**/*.csv
+data/output/*
+data/pdfs/*.pdf
+
+# Docker-related ignores
+*.dockerignore
+docker-compose.override.yml
+
+# Packaging-related ignores
+*.egg-info
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+logs/
+tmp/
+*.tmp
+*.bak
