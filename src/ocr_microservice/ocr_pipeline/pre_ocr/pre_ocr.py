@@ -35,6 +35,9 @@ def receipt_object_detection_yolos(image: Image.Image, filename: str, injector: 
     return rotated2_image
 
 def process(image: Image.Image, filename: str, injector: Injector) -> Image.Image:
+    if injector.pipeline.pre_ocr_algo == None:
+        return image
+    
     save_image(filename, '_original_pre_ocr', image, injector)
     pre_processed_image = injector.pipeline.pre_ocr_algo(image, filename, injector)
     save_image(filename, '_after_pre_ocr', pre_processed_image, injector)
