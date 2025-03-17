@@ -241,21 +241,21 @@ class Receipt:
     def get(self):
         output = {}
 
-        print("Parsing date")
+        # print("Parsing date")
         output['date'] = self.date()
-        print("Parsing time")
+        # print("Parsing time")
         output['time'] = self.time()
-        print("Parsing tax table")
+        # print("Parsing tax table")
         output['tax_table'] = self.tax_table()
-        print("Parsing store")
+        # print("Parsing store")
         output['store'] = self.store()
-        print("Parsing item table")
+        # print("Parsing item table")
         output['item_table'] = self.item_table()
-        print("Parsing sub_total")
+        # print("Parsing sub_total")
         output['sub_total'] = self.sub_total()
-        print("Parsing total")
+        # print("Parsing total")
         output['total'] = self.total()
-        print("Parsing payment")
+        # print("Parsing payment")
         output['payment'] = self.payment()
 
         return output
@@ -283,4 +283,4 @@ def to_json(images: List[Image.Image], filename: str, image_results: list, injec
     #output['metadata'] = image_results
     output['receipt'] = receipt.get()
 
-    return json.dumps(output, indent=2)
+    return output

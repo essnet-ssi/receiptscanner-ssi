@@ -7,18 +7,20 @@ dependencies:
   - python=3.10
   - pytorch==1.13.1
   - torchvision==0.14.1
-  - torchaudio==0.13.1
   - cpuonly
   - transformers
   - evaluate
   - tensorboard
   - pycocotools
   - lightning
+  - pytorch-lightning
   - pip
   - pip:
-      - paddlepaddle==2.5.2
-      - paddleocr
-      - 'transformers[torch]'
-      - segformer-pytorch
-      - pytest
-      - pika
+    - torchaudio==0.13.1
+    - paddlepaddle==2.5.2
+    - paddleocr
+    - "transformers[torch]"
+    - segformer-pytorch
+    - pytest
+    - pika
+    - pdf2image

@@ -1,5 +1,4 @@
 import os
-from pathlib import Path
 from PIL import Image
 
 from ocr_microservice.ocr_pipeline.injector import Injector
@@ -30,8 +29,21 @@ def test_full_pipeline():
     injector = Injector(Config(save_results=True, data_dir=output_dir), Pipeline(), Models(), Cache())
 
     # Act
-    results = process(pipeline_image, injector)
+    extracted_receipt = process(pipeline_image, injector)
 
     # Assert
-    assert results is not None
-    assert isinstance(results, str)
+    assert extracted_receipt is not None
+    assert isinstance(extracted_receipt, dict)
+    assert 'products' in extracted_receipt
+    assert 'receipt_date' in extracted_receipt
+    assert 'shop_name' in extracted_receipt
+    assert 'total_price' in extracted_receipt
+    assert isinstance(extracted_receipt['products'], list)
+    assert isinstance(extracted_receipt['receipt_date'], str)
+    assert isinstance(extracted_receipt['shop_name'], str)
+    assert isinstance(extracted_receipt['total_price'], float)
+    assert len(extracted_receipt['products']) > 0
+    assert extracted_receipt['receipt_date'] is not None
+    assert extracted_receipt['shop_name'] is not None
+    assert extracted_receipt['total_price'] is not None
+    assert extracted_receipt['total_price'] > 0.0

@@ -1,11 +1,11 @@
---- paddleocr.py.orig	2024-07-19 11:18:02.441013507 +0000
-+++ paddleocr.py	2024-07-19 11:18:11.996947548 +0000
-@@ -727,7 +727,7 @@
+--- paddleocr.py.orig	2024-02-02 10:48:50.843676044 +0100
++++ paddleocr.py	2024-02-02 10:52:45.109931696 +0100
+@@ -671,7 +671,7 @@
              for idx, img in enumerate(imgs):
                  img = preprocess_image(img)
-                 dt_boxes, rec_res, _ = self.__call__(img, cls, slice)
--                if not dt_boxes and not rec_res:
-+                if not dt_boxes.any() and not rec_res:
+                 dt_boxes, elapse = self.text_detector(img)
+-                if not dt_boxes:
++                if not dt_boxes.any():
                      ocr_res.append(None)
                      continue
-                 tmp_res = [[box.tolist(), res] for box, res in zip(dt_boxes, rec_res)]
+                 tmp_res = [box.tolist() for box in dt_boxes]

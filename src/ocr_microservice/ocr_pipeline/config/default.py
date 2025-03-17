@@ -24,8 +24,8 @@ class Config:
 
 class Pipeline:
     def __init__(self):
-        #self.pre_ocr_algo = receipt_segmentation
-        self.pre_ocr_algo = receipt_object_detection_yolos
+        self.pre_ocr_algo = receipt_segmentation
+        # self.pre_ocr_algo = receipt_object_detection_yolos
         self.post_ocr_steps = [
             run_lilt,
             post_process_lilt,
@@ -46,21 +46,17 @@ class HardwareType(Enum):
 
 class Models:
     def _load_paddle_model(self, hardware_type: HardwareType):
-        # https://paddlepaddle.github.io/PaddleOCR/en/ppocr/blog/inference_args.html
-        rec_model_dir = str(resources.path(paddle, "paddle-model"))
-        rec_char_dict_path = str(resources.path(paddle, "dict.txt"))
+        rec_model_dir = str(resources.path(paddle, "en_PP-OCRv3_rec_best4"))
+        rec_char_dict_path = str(resources.path(paddle, "en_dict.txt"))
         use_gpu = hardware_type == HardwareType.CONDA_GPU
         self.paddle_model = PaddleOCR(
             rec_model_dir=rec_model_dir,
             rec_char_dict_path=rec_char_dict_path,
-            lang="latin",
+            lang="en",
             use_gpu=use_gpu,
             show_debug=False,
             show_log=False,
             det_limit_side_len=10000,
-            det_db_thresh=0.2,
-            #det_db_box_thresh=0.6,
-            det_db_unclip_ratio=2.0,
             det_db_score_mode='slow',
         )
 

@@ -35,4 +35,3 @@ def test_pre_ocr():
     # Assert
     assert results is not None
     assert isinstance(results, Image.Image)
-

@@ -1,68 +1,51 @@
 # OCR Microservice
 
-This project contains a microservice that extracts information from receipt images or pdf e-tickets using OCR and outputs it as a json file.
+This project contains a microservice that extracts information from receipt images or PDF e-tickets.
 
 ## Table of Contents
 
-- [Usage](#usage)
 - [Overview](#overview)
   - [Pre-OCR](#1-pre-ocr)
   - [OCR](#2-ocr)
   - [Post-OCR](#3-post-ocr)
-  - [Integration](#4-integration)
+- [Local Deployment](#local-deployment)
+- [Usage](#usage)
 - [Development](#development)
-  - [Getting Started](#getting-started)
   - [Testing](#testing)
-  - [Design and implementation](#design-and-implementation)
-  - [Benchmarking](#benchmarking)
 - [Model Training](#model-training)
 - [Deployment](#deployment)
 - [Authors](#authors)
 - [License](#license)
 
-## Usage
-
-TODO all
-TODO where to put run.py?
-
-### python
-
 ## Overview
 
-The core of the microservice is the OCR pipeline which takes an image or (pdf) e-ticket through 3 steps:
+The core of the microservice is the OCR pipeline, which processes an image or PDF receipt through three steps:
 
-- Pre-OCR: preprocessing the received image or pdf
-- OCR: optical character recognition
-- Post-OCR
-  - document (receipt) understanding, and
-  - final post-processing which output a json file.
+1. **Pre-OCR**: Receipt detection and rotational correction.
+2. **OCR**: Text detection and text recognition.
+3. **Post-OCR**: Machine Learning-based and Rule-based logic for classifying OCR text.
 
-The OCR pipeline is a python runtime. It can be deployed as a microservice (Docker container). Communication with this microservice is done via RabbitMQ.
-The python runtime can also be integrated in other ways (not available in this git repo).
+The OCR pipeline runs in Python. It can be executed locally (see the [Usage](#usage) section) or deployed as a Kubernetes pod, interfacing through a RabbitMQ message bus.
 
 ### 1. Pre-OCR
 
-Main responsibilities of Pre-OCR are receipt detection, orientation correction and image cropping.
-The input is a single receipt in the form of:
+The primary responsibilities of Pre-OCR include receipt detection, orientation correction, and image cropping. The input is either:
 
-- a set of images, or
-- an e-ticket (pdf). The pdf is converted into a set of images which then follows the same flow as normal images.
+- A photo of a receipt, or
+- An e-ticket (PDF), which is converted into a set of images
 
-Two methods have been deployed:
+Two methods are implemented:
 
-- semantic segmentation, and
-- object detection
+- Semantic segmentation
+- Object detection
 
-#### Semanantic segmentation
+#### Semantic Segmentation
 
-TODO Tom
-
-1. The pre-ocr pipeline takes as input an image of a receipt.
-2. It then segments the image. Which means that it labels each pixel of the receipt as belonging to the receipt or not.
-3. It then draws the smallest possible bounding rectangle around the pixels classified as belonging to the receipt.
-4. It uses heuristics to try and correctly orrient the receipt, such that it is upright.
-5. It crops the receipt using the bounding rectangle.
-6. It then adjusts the orientation again slightly, using paddle_ocr to fine tune the orientation.
+1. The Pre-OCR pipeline takes an image of a receipt as input.
+2. It segments the image, labeling each pixel as part of the receipt or not.
+3. The smallest possible bounding rectangle is drawn around the biggest 'island' of pixels classified as part of the receipt.
+4. Heuristics are applied to ensure the receipt is oriented upright.
+5. The receipt is cropped using the bounding rectangle.
 
 ##### Object detection
 
@@ -74,7 +57,15 @@ The used AI model for object detection is [YOLOS](https://huggingface.co/docs/tr
 
 ### 2. OCR
 
-TODO Tim
+Several OCR models were compared:
+
+- EasyOCR
+- Tesseract
+- PaddleOCR
+- TrOCR
+- TODO: (Anymore, Tim?)
+
+A fine-tuned PaddleOCR model provided the best accuracy for this task. The model was trained on a small labeled dataset of ~300 receipts.
 
 ### 3. Post-OCR
 
@@ -82,45 +73,35 @@ The output of the OCR step includes text and text locations.
 That information is used:
 
 - to understand the receipt i.e. trying to give a meaning to the recognized text (by OCR),
-- to correct OCR mistakes (TODO Tim - date, time corrections etc.),
-- to produce a final json output which contains all receipt details (and some metadata).
+- to correct OCR mistakes
 
-#### Receipt understanding
+#### Document understanding
 
 In order to understand the receipts, the pipeline applies a fine-tuned model of [LiLT](https://huggingface.co/docs/transformers/main/model_doc/lilt).
 See also [here](https://github.com/jpWang/LiLT).
 
 LiLT combines text and layout (text position) information to label a text box. A variety of labels exist, ranging from store address to tax price, and can be found in *./src/ocr_microservice/model_training/lilt/labels.xlsx*.
 
-#### Corrections
+#### Rule-Based Extraction
 
-TODO Tim
+A rule-based correction step improves output quality by extracting:
 
-#### Final post-processing
+- **Receipt date**: Identified using regular expression patterns on the OCR output.
+- **Total price**: Detected by matching specific keywords (editable in [total_price_extractor.py](src/ocr_microservice/ocr_pipeline/rule_based_extractor/extractors/total_price_extractor.py)), which if found are then matched with strings that look like prices on the same line.
+- **Shop name**: Detected similarly using keywords (editable in [shop_extractor.py](src/ocr_microservice/ocr_pipeline/rule_based_extractor/extractors/shop_extractor.py)).
+- **Products and prices**: Identifies price columns and matches associated product names.
 
-Given the output of receipt understanding and its corrections, a json output is being generated which contains all found information as well as metadata (i.e. where the information came from).
+## Local Deployment
 
-### 4. Integration
+To run the microservice, you must first download trained ML models (not included in this repository). Contact the developers (see [Authors](#authors)) for these models. Place them in the [models](ocr_mircoservice/src/ocr_microservice/ocr_pipeline/resources/models) directory.
 
-The OCR pipeline can be integrated in various ways. In this git repo, a Dockerfile is available to create a Docker image.
-A container instance of this image will listen to a RabbitMQ bus for messages.
+Instructions to set up a Conda environment are provided below. Two environment flavors are available: **CUDA-GPU** and **CPU** (Apple Silicon compatible).
 
-TODO Tom: little more details.
-
-## Development
-
-### Getting started
-
-To setup a local development environment, you first need to setup a Conda environment. The following instructions provide guidance on creating this environment for a GPU that supports CUDA, as well as for a CPU setup, which is also compatible with the latest Apple Silicon chips.
-
-After setting up the Conda environment, activate it, and then install the ocr_microservice package locally. Run the following command in the root folder of this project, where `pyproject.toml` is located:
+After setting up the Conda environment, activate it and install the `ocr_microservice` package locally with:
 
 ```bash
 pip install -e .
 ```
-
-Lastly, download the machine learning models (which are not included in the git repository) and place them inside `./src/ocr_microservice/ocr_pipeline/resources/models`.
-
 #### Conda **GPU-CUDA** Environment
 
 References:
@@ -168,7 +149,7 @@ conda install tensorboard
 conda install -c conda-forge pycocotools
 conda install lightning -c conda-forge
 conda install pytorch-lightning -c conda-forge
-pip install paddlepaddle=2.5.2
+pip install paddlepaddle==2.5.2
 pip install paddleocr
 pip install 'transformers[torch]'
 pip install segformer-pytorch
@@ -176,48 +157,37 @@ pip install pytest
 pip install pika
 pip install pdf2image
 # https://github.com/PaddlePaddle/PaddleOCR/issues/10924
-patch <HOME_DIR>/anaconda3/envs/ocr_microservice_cpu_env/lib/python3.10/site-packages/paddleocr/paddleocr.py < paddleocr.py.patch
+# patch <HOME_DIR>/anaconda3/envs/ocr_microservice_cpu_env/lib/python3.10/site-packages/paddleocr/paddleocr.py < paddleocr.py.patch
 ```
+
+## Usage
+
+An example of how to run the microservice is available in [test_full_pipeline.py](tests/test_full_pipeline.py).  
+The main entry point is the `process` function in [ocr_pipeline.py](src/ocr_microservice/ocr_pipeline/ocr_pipeline.py).
+
+## Development
 
 ### Testing
 
-After installing pytest inside your Conda environment, you may need to reactivate it.
-
-Then to run the tests, run the following command inside the root directory:
+After installing `pytest`, activate your environment and run:
 
 ```bash
 pytest tests
 ```
 
-### Design and implementation
-
-TODO Tom?
-
-### Benchmarking
-
-TODO Tom ?
-
 ## Model Training
 
-### receipt detection: segformer semantic segmentation
-
-TODO Tom
-
-### receipt detection: yolos object detection
-
-See the description in *./src/ocr_microservice/model_training/yolos/README.md*.
-
-### paddle OCR text recognition
-
-TODO Tim
-
-### lilt receipt understanding
-
-See the description in *./src/ocr_microservice/model_training/lilt/README.md*.
+- **Segformer semantic segmentation**: [train.md](src/ocr_microservice/model_training/segformer/train.md)
+- **YOLOS object detection**: See *./src/ocr_microservice/model_training/yolos/README.md*
+- **Paddle OCR text recognition**: See [paddleocr/README.md](src/ocr_microservice/model_training/paddleocr/README.md)
+- **LiLT receipt understanding**: See *./src/ocr_microservice/model_training/lilt/README.md*
 
 ## Deployment
 
-TODO Tom : deployment with Dockerfile + RabbitMQ
+To deploy as a Kubernetes pod:
+
+1. Build the Dockerfile.
+2. Update Kubernetes configurations in [k8s](k8s).
 
 ## Authors
 
@@ -233,9 +203,9 @@ The code was developed by CBS (Statistics Netherlands) and [hbits CV](hbits.io).
 In alphabetical order, the main authors were:
 
 - Pieter Beyens <pieter.beyens@hbits.io>
-- Tom Oerlemans TODO Tom
-- Tim Schijvenaars TODO Tim
+- Tom Oerlemans <ts.oerlemans@cbs.nl>
+- Tim Schijvenaars <t.schijvenaars@cbs.nl>
 
 ## License
 
-See LICENSE.md
+TODO I propose an MIT license
