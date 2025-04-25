@@ -277,7 +277,7 @@ The code was developed by CBS (Statistics Netherlands) and [hbits CV](hbits.io).
 In alphabetical order, the main authors were:
 
 - Pieter Beyens <pieter.beyens@hbits.io>
-- Tom Oerlemans TODO Tom
+- Tom Oerlemans <ts.oerlemans@cbs.nl>
 - Tim Schijvenaars TODO Tim
 
 ## License
