@@ -22,10 +22,20 @@ This project contains a microservice that extracts information from receipt imag
 
 ## Usage
 
-TODO all
-TODO where to put run.py?
+```bash
+usage: run.py [-h] [-u [USER_SELECTION]] [-o OUTPUT_DIR] [-p PIPELINE] images [images ...]
+```
 
-### python
+At least one image argument is required.
+
+Several options are available:
+
+- -h prints the help
+- -u the location (rectangle) of the receipt in the photo
+- -o the output directory
+- -p which pipeline to use
+
+Example pipelines can be found in the src/ocr_pipeline/config directory.
 
 ## Overview
 
